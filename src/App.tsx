@@ -5,7 +5,7 @@ import LoginPage from './pages/LoginPage';
 import FinancialPlanPage from './pages/FinancialPlanPage';
 import ReportPage from './pages/ReportPage';
 import LoanFinderPage from './pages/LoanFinderPage';
-import ExistingBusinessAnalysis from './pages/ExistingBusinessAnalysis';
+import ExistingBusinessForm from './pages/ExistingBusinessForm';
 import BusinessAnalysisReport from './pages/BusinessAnalysisReport';
 import Chatbot from './components/Chatbot';
 import LanguageSelector from './components/LanguageSelector';
@@ -25,7 +25,7 @@ function AppRouter() {
     case 'loan-finder':
       return <LoanFinderPage />;
     case 'existing-business-analysis':
-      return <ExistingBusinessAnalysis />;
+      return <ExistingBusinessForm />;
     case 'business-analysis-report':
       return <BusinessAnalysisReport />;
     default:

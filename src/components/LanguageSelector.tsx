@@ -1,5 +1,6 @@
 import React from 'react';
-import { useApp, Language } from '../context/AppContext';
+import { useLanguage } from '../context/LanguageContext';
+import { Language } from '../context/AppContext';
 
 const languages: { code: Language; name: string; flag: string }[] = [
   { code: 'en', name: 'English', flag: '🇬🇧' },
@@ -14,13 +15,13 @@ const languages: { code: Language; name: string; flag: string }[] = [
 ];
 
 export default function LanguageSelector() {
-  const { userData, setUserData } = useApp();
+  const { language, setLanguage } = useLanguage();
 
   return (
     <div className="fixed top-4 right-4 z-50">
       <select
-        value={userData.language}
-        onChange={(e) => setUserData({ language: e.target.value as Language })}
+        value={language}
+        onChange={(e) => setLanguage(e.target.value as Language)}
         className="bg-white border-2 border-green-600 rounded-lg px-3 py-2 text-sm font-medium text-gray-800 shadow-md hover:shadow-lg transition-shadow cursor-pointer"
       >
         {languages.map((lang) => (

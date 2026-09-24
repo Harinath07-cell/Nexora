@@ -1,4 +1,4 @@
-import { createContext, useContext, ReactNode } from 'react';
+import { createContext, useContext, useState, ReactNode } from 'react';
 import { useApp, Language } from './AppContext';
 import { translations, Translations } from '../data/translations';
 
@@ -11,11 +11,14 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const { userData, setUserData } = useApp();
-  const language = userData.language;
+  const { setUserData } = useApp();
+  const [language, setLanguageState] = useState<Language>('en');
+  
   const setLanguage = (lang: Language) => {
-    setUserData({ language: lang });
+    setLanguageState(lang);
+    setUserData({ language: lang }); // Sync to AppContext
   };
+  
   const t = translations[language];
 
   return (
