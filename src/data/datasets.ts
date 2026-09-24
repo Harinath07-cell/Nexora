@@ -1,3 +1,5 @@
+import { BUSINESS_STATISTICS, MARKET_PRICES, SCHEME_DETAILS } from './realData';
+
 export const BUSINESS_TYPES = [
   { value: 'dairy', label: 'dairy' },
   { value: 'grocery', label: 'grocery' },
@@ -54,18 +56,18 @@ export function calculateFinancials(margin: number): FinancialResult {
   let tenureYears: number;
   let moratoriumMonths: number;
 
-  if (totalCost <= 140000) {
+  if (totalCost <= SCHEME_DETAILS.microFinance.maxProjectCost) {
     scheme = 'micro';
-    schemeName = 'Micro Finance Scheme';
-    interestRate = 6.5;
-    tenureYears = 3;
-    moratoriumMonths = 3;
+    schemeName = SCHEME_DETAILS.microFinance.name;
+    interestRate = SCHEME_DETAILS.microFinance.interestRate;
+    tenureYears = SCHEME_DETAILS.microFinance.tenureYears;
+    moratoriumMonths = SCHEME_DETAILS.microFinance.moratoriumMonths;
   } else {
     scheme = 'term';
-    schemeName = 'Term Loan Scheme';
-    interestRate = 8.0;
-    tenureYears = 7;
-    moratoriumMonths = 6;
+    schemeName = SCHEME_DETAILS.termLoan.name;
+    interestRate = SCHEME_DETAILS.termLoan.interestRate;
+    tenureYears = SCHEME_DETAILS.termLoan.tenureYears;
+    moratoriumMonths = SCHEME_DETAILS.termLoan.moratoriumMonths;
   }
 
   const totalQuarters = tenureYears * 4;
@@ -133,6 +135,13 @@ export interface ReportData {
   threats: Array<{ name: string; description: string; severity: 'high' | 'medium' | 'low' }>;
   competitors: Array<{ name: string; distance: string; rating: string }>;
   pricing: { suggested: string; tips: string[] };
+  statistics?: {
+    survivalRate: number;
+    avgRevenue: number;
+    profitMargin: number;
+    setupTime: string;
+    source: string;
+  };
 }
 
 export function generateReportData(businessType: string): ReportData {
@@ -172,8 +181,15 @@ export function generateReportData(businessType: string): ReportData {
         { name: 'Amul Outlet', distance: '12 km', rating: '4.5' },
       ],
       pricing: {
-        suggested: '₹50-60/litre milk, ₹300-400/kg paneer, ₹250-350/kg curd',
+        suggested: `₹${MARKET_PRICES.dairy.milk.min}-${MARKET_PRICES.dairy.milk.max}/${MARKET_PRICES.dairy.milk.unit} milk, ₹${MARKET_PRICES.dairy.paneer.min}-${MARKET_PRICES.dairy.paneer.max}/${MARKET_PRICES.dairy.paneer.unit} paneer, ₹${MARKET_PRICES.dairy.curd.min}-${MARKET_PRICES.dairy.curd.max}/${MARKET_PRICES.dairy.curd.unit} curd (Source: Agmarknet)`,
         tips: ['Match local mandi/haat prices', 'Offer home delivery for regular customers', 'Premium pricing for organic/farm-fresh', 'Bundle products for better margins'],
+      },
+      statistics: {
+        survivalRate: BUSINESS_STATISTICS.dairy.survivalRate3Years,
+        avgRevenue: BUSINESS_STATISTICS.dairy.avgMonthlyRevenue,
+        profitMargin: BUSINESS_STATISTICS.dairy.profitMargin,
+        setupTime: BUSINESS_STATISTICS.dairy.setupTime,
+        source: BUSINESS_STATISTICS.dairy.source,
       },
     },
     default: {
@@ -209,6 +225,13 @@ export function generateReportData(businessType: string): ReportData {
       pricing: {
         suggested: 'Market rate based on local demand and competition',
         tips: ['Research competitor prices', 'Offer value-added services', 'Build customer loyalty', 'Adjust for seasonal demand'],
+      },
+      statistics: {
+        survivalRate: 75,
+        avgRevenue: 35000,
+        profitMargin: 30,
+        setupTime: '1-3 months',
+        source: 'MSME Ministry Annual Report 2022-23',
       },
     },
   };

@@ -254,6 +254,34 @@ Ministry of Social Justice & Empowerment
           </div>
         </div>
 
+        {/* Business Statistics */}
+        {report.statistics && (
+          <div className="bg-white rounded-2xl shadow-md p-6 mb-6 border border-gray-100">
+            <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+              <span className="text-2xl">📊</span> Business Statistics
+            </h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="bg-green-50 rounded-lg p-4 border border-green-200">
+                <p className="text-xs text-gray-600 mb-1">3-Year Survival Rate</p>
+                <p className="text-2xl font-bold text-green-700">{report.statistics.survivalRate}%</p>
+              </div>
+              <div className="bg-blue-50 rounded-lg p-4 border border-blue-200">
+                <p className="text-xs text-gray-600 mb-1">Avg Monthly Revenue</p>
+                <p className="text-2xl font-bold text-blue-700">₹{report.statistics.avgRevenue.toLocaleString('en-IN')}</p>
+              </div>
+              <div className="bg-purple-50 rounded-lg p-4 border border-purple-200">
+                <p className="text-xs text-gray-600 mb-1">Profit Margin</p>
+                <p className="text-2xl font-bold text-purple-700">{report.statistics.profitMargin}%</p>
+              </div>
+              <div className="bg-orange-50 rounded-lg p-4 border border-orange-200">
+                <p className="text-xs text-gray-600 mb-1">Setup Time</p>
+                <p className="text-2xl font-bold text-orange-700">{report.statistics.setupTime}</p>
+              </div>
+            </div>
+            <p className="text-xs text-gray-500 mt-4 italic">Source: {report.statistics.source}</p>
+          </div>
+        )}
+
         <div className="bg-gradient-to-r from-green-600 to-green-700 rounded-2xl shadow-lg p-6 text-center text-white">
           <h3 className="text-xl font-bold mb-2">{t.download || 'Download Your Report'}</h3>
           <p className="text-green-100 mb-4">Save this report for your records</p>
