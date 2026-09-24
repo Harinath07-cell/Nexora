@@ -22,10 +22,11 @@ export default function LanguageSelector() {
       <select
         value={language}
         onChange={(e) => setLanguage(e.target.value as Language)}
-        className="bg-white border-2 border-green-600 rounded-lg px-3 py-2 text-sm font-medium text-gray-800 shadow-md hover:shadow-lg transition-shadow cursor-pointer"
+        className="bg-white border-2 border-green-600 rounded-lg px-3 py-2 sm:px-4 sm:py-2.5 text-sm sm:text-base font-medium text-gray-800 shadow-md hover:shadow-lg transition-shadow cursor-pointer min-w-[120px] sm:min-w-[140px]"
+        aria-label="Select language"
       >
         {languages.map((lang) => (
-          <option key={lang.code} value={lang.code}>
+          <option key={lang.code} value={lang.code} className="text-base">
             {lang.flag} {lang.name}
           </option>
         ))}
