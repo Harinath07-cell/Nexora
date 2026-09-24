@@ -14,15 +14,15 @@ export default function FinancialPlanPage() {
   return (
     <div className="min-h-screen bg-gray-50 pb-8">
       <header className="bg-white shadow-sm border-b sticky top-0 z-40">
-        <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-green-700 rounded-lg flex items-center justify-center text-white text-lg font-bold">ग्रा</div>
-            <div>
-              <h1 className="text-lg font-bold text-gray-800">{t.financialPlan}</h1>
-              <p className="text-xs text-gray-500">{userData.name} • {userData.village}, {userData.district}</p>
+        <div className="max-w-5xl mx-auto px-3 sm:px-4 py-3 flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 bg-gradient-to-br from-green-500 to-green-700 rounded-lg flex items-center justify-center text-white text-base sm:text-lg font-bold flex-shrink-0">ग्रा</div>
+            <div className="min-w-0 flex-1">
+              <h1 className="text-sm sm:text-lg font-bold text-gray-800 truncate">{t.financialPlan}</h1>
+              <p className="text-xs text-gray-500 truncate">{userData.name} • {userData.village}, {userData.district}</p>
             </div>
           </div>
-          <button onClick={() => setScreen('login')} className="text-gray-500 hover:text-gray-700 text-sm px-3 py-1.5 rounded-lg hover:bg-gray-100">
+          <button onClick={() => setScreen('login')} className="text-gray-500 hover:text-gray-700 text-xs sm:text-sm px-2 sm:px-3 py-1.5 rounded-lg hover:bg-gray-100 whitespace-nowrap flex-shrink-0">
             ← {t.editDetails}
           </button>
         </div>
@@ -33,26 +33,26 @@ export default function FinancialPlanPage() {
           <Speaker text={`${t.totalCost} is ${financials.totalCost.toLocaleString('en-IN')} rupees. ${t.loanAmount} is ${financials.loanAmount.toLocaleString('en-IN')} rupees.`} />
         </div>
 
-        <div className="grid grid-cols-2 gap-4 mb-6">
-          <div className="bg-white rounded-xl shadow-md p-5 border border-gray-100">
-            <div className="text-3xl mb-2">💰</div>
-            <div className="text-2xl font-bold text-gray-800">₹{financials.totalCost.toLocaleString('en-IN')}</div>
-            <div className="text-sm text-gray-600 font-medium">{t.totalCost}</div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6">
+          <div className="bg-white rounded-xl shadow-md p-4 sm:p-5 border border-gray-100 min-w-0">
+            <div className="text-2xl sm:text-3xl mb-2">💰</div>
+            <div className="text-xl sm:text-2xl font-bold text-gray-800 break-words">₹{financials.totalCost.toLocaleString('en-IN')}</div>
+            <div className="text-xs sm:text-sm text-gray-600 font-medium">{t.totalCost}</div>
           </div>
-          <div className="bg-white rounded-xl shadow-md p-5 border border-gray-100">
-            <div className="text-3xl mb-2">🏦</div>
-            <div className="text-2xl font-bold text-gray-800">₹{financials.loanAmount.toLocaleString('en-IN')}</div>
-            <div className="text-sm text-gray-600 font-medium">{t.loanAmount}</div>
+          <div className="bg-white rounded-xl shadow-md p-4 sm:p-5 border border-gray-100 min-w-0">
+            <div className="text-2xl sm:text-3xl mb-2">🏦</div>
+            <div className="text-xl sm:text-2xl font-bold text-gray-800 break-words">₹{financials.loanAmount.toLocaleString('en-IN')}</div>
+            <div className="text-xs sm:text-sm text-gray-600 font-medium">{t.loanAmount}</div>
           </div>
-          <div className="bg-white rounded-xl shadow-md p-5 border border-gray-100">
-            <div className="text-3xl mb-2">👤</div>
-            <div className="text-2xl font-bold text-gray-800">₹{financials.margin.toLocaleString('en-IN')}</div>
-            <div className="text-sm text-gray-600 font-medium">{t.yourMargin}</div>
+          <div className="bg-white rounded-xl shadow-md p-4 sm:p-5 border border-gray-100 min-w-0">
+            <div className="text-2xl sm:text-3xl mb-2">👤</div>
+            <div className="text-xl sm:text-2xl font-bold text-gray-800 break-words">₹{financials.margin.toLocaleString('en-IN')}</div>
+            <div className="text-xs sm:text-sm text-gray-600 font-medium">{t.yourMargin}</div>
           </div>
-          <div className="bg-white rounded-xl shadow-md p-5 border border-gray-100">
-            <div className="text-3xl mb-2">📅</div>
-            <div className="text-2xl font-bold text-gray-800">₹{financials.quarterlyEMI.toLocaleString('en-IN', { maximumFractionDigits: 0 })}</div>
-            <div className="text-sm text-gray-600 font-medium">{t.quarterlyEMI}</div>
+          <div className="bg-white rounded-xl shadow-md p-4 sm:p-5 border border-gray-100 min-w-0">
+            <div className="text-2xl sm:text-3xl mb-2">📅</div>
+            <div className="text-xl sm:text-2xl font-bold text-gray-800 break-words">₹{financials.quarterlyEMI.toLocaleString('en-IN', { maximumFractionDigits: 0 })}</div>
+            <div className="text-xs sm:text-sm text-gray-600 font-medium">{t.quarterlyEMI}</div>
           </div>
         </div>
 
@@ -80,22 +80,22 @@ export default function FinancialPlanPage() {
           <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
             <span className="text-2xl">📋</span> {t.schemeRepayment}
           </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
-            <div className="bg-green-50 rounded-lg p-3 border border-green-200">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
+            <div className="bg-green-50 rounded-lg p-3 border border-green-200 min-w-0">
               <p className="text-xs text-gray-600">{t.scheme}</p>
-              <p className="font-bold text-gray-800">{financials.schemeName}</p>
+              <p className="font-bold text-gray-800 break-words">{financials.schemeName}</p>
             </div>
-            <div className="bg-green-50 rounded-lg p-3 border border-green-200">
+            <div className="bg-green-50 rounded-lg p-3 border border-green-200 min-w-0">
               <p className="text-xs text-gray-600">{t.interest}</p>
-              <p className="font-bold text-gray-800">{financials.interestRate}% p.a.</p>
+              <p className="font-bold text-gray-800 break-words">{financials.interestRate}% p.a.</p>
             </div>
-            <div className="bg-green-50 rounded-lg p-3 border border-green-200">
+            <div className="bg-green-50 rounded-lg p-3 border border-green-200 min-w-0">
               <p className="text-xs text-gray-600">{t.tenure}</p>
-              <p className="font-bold text-gray-800">{financials.tenureYears} years</p>
+              <p className="font-bold text-gray-800 break-words">{financials.tenureYears} years</p>
             </div>
-            <div className="bg-yellow-50 rounded-lg p-3 border border-yellow-200">
+            <div className="bg-yellow-50 rounded-lg p-3 border border-yellow-200 min-w-0">
               <p className="text-xs text-gray-600">{t.moratorium}</p>
-              <p className="font-bold text-gray-800">{financials.moratoriumMonths} months</p>
+              <p className="font-bold text-gray-800 break-words">{financials.moratoriumMonths} months</p>
             </div>
           </div>
         </div>

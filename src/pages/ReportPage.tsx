@@ -103,18 +103,18 @@ Ministry of Social Justice & Empowerment
           <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
             <span className="text-2xl">🎯</span> 1. {t.marketReach || 'Market Reach'}
           </h3>
-          <div className="bg-blue-50 rounded-lg p-4 border border-blue-100 mb-4">
-            <div className="grid grid-cols-3 gap-4 text-center">
-              <div>
-                <p className="text-2xl font-bold text-gray-800">{report.marketReach.population.toLocaleString()}</p>
+          <div className="bg-blue-50 rounded-lg p-3 sm:p-4 border border-blue-100 mb-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 text-center">
+              <div className="min-w-0">
+                <p className="text-xl sm:text-2xl font-bold text-gray-800 break-words">{report.marketReach.population.toLocaleString()}</p>
                 <p className="text-xs text-gray-600">Population (10km)</p>
               </div>
-              <div>
-                <p className="text-2xl font-bold text-gray-800">{report.marketReach.households.toLocaleString()}</p>
+              <div className="min-w-0">
+                <p className="text-xl sm:text-2xl font-bold text-gray-800 break-words">{report.marketReach.households.toLocaleString()}</p>
                 <p className="text-xs text-gray-600">Households</p>
               </div>
-              <div>
-                <p className="text-2xl font-bold text-gray-800">{report.marketReach.targetCustomers.toLocaleString()}</p>
+              <div className="min-w-0">
+                <p className="text-xl sm:text-2xl font-bold text-gray-800 break-words">{report.marketReach.targetCustomers.toLocaleString()}</p>
                 <p className="text-xs text-gray-600">Target Customers</p>
               </div>
             </div>
@@ -288,38 +288,38 @@ Ministry of Social Justice & Empowerment
 
         {/* Business Statistics */}
         {report.statistics && (
-          <div className="bg-white rounded-2xl shadow-md p-6 mb-6 border border-gray-100">
-            <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-              <span className="text-2xl">📊</span> Business Statistics
+          <div className="bg-white rounded-2xl shadow-md p-4 sm:p-6 mb-6 border border-gray-100">
+            <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+              <span className="text-xl sm:text-2xl">📊</span> Business Statistics
             </h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="bg-green-50 rounded-lg p-4 border border-green-200">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              <div className="bg-green-50 rounded-lg p-3 sm:p-4 border border-green-200 min-w-0">
                 <p className="text-xs text-gray-600 mb-1">3-Year Survival Rate</p>
-                <p className="text-2xl font-bold text-green-700">{report.statistics.survivalRate}%</p>
+                <p className="text-xl sm:text-2xl font-bold text-green-700 break-words">{report.statistics.survivalRate}%</p>
               </div>
-              <div className="bg-blue-50 rounded-lg p-4 border border-blue-200">
+              <div className="bg-blue-50 rounded-lg p-3 sm:p-4 border border-blue-200 min-w-0">
                 <p className="text-xs text-gray-600 mb-1">Avg Monthly Revenue</p>
-                <p className="text-2xl font-bold text-blue-700">₹{report.statistics.avgRevenue.toLocaleString('en-IN')}</p>
+                <p className="text-xl sm:text-2xl font-bold text-blue-700 break-words">₹{report.statistics.avgRevenue.toLocaleString('en-IN')}</p>
               </div>
-              <div className="bg-purple-50 rounded-lg p-4 border border-purple-200">
+              <div className="bg-purple-50 rounded-lg p-3 sm:p-4 border border-purple-200 min-w-0">
                 <p className="text-xs text-gray-600 mb-1">Profit Margin</p>
-                <p className="text-2xl font-bold text-purple-700">{report.statistics.profitMargin}%</p>
+                <p className="text-xl sm:text-2xl font-bold text-purple-700 break-words">{report.statistics.profitMargin}%</p>
               </div>
-              <div className="bg-orange-50 rounded-lg p-4 border border-orange-200">
+              <div className="bg-orange-50 rounded-lg p-3 sm:p-4 border border-orange-200 min-w-0">
                 <p className="text-xs text-gray-600 mb-1">Setup Time</p>
-                <p className="text-2xl font-bold text-orange-700">{report.statistics.setupTime}</p>
+                <p className="text-xl sm:text-2xl font-bold text-orange-700 break-words">{report.statistics.setupTime}</p>
               </div>
             </div>
-            <p className="text-xs text-gray-500 mt-4 italic">Source: {report.statistics.source}</p>
+            <p className="text-xs text-gray-500 mt-4 italic break-words">Source: {report.statistics.source}</p>
           </div>
         )}
 
-        <div className="bg-gradient-to-r from-green-600 to-green-700 rounded-2xl shadow-lg p-6 text-center text-white">
-          <h3 className="text-xl font-bold mb-2">{t.download || 'Download Your Report'}</h3>
-          <p className="text-green-100 mb-4">Save this report for your records</p>
+        <div className="bg-gradient-to-r from-green-600 to-green-700 rounded-2xl shadow-lg p-4 sm:p-6 text-center text-white">
+          <h3 className="text-lg sm:text-xl font-bold mb-2">{t.download || 'Download Your Report'}</h3>
+          <p className="text-sm sm:text-base text-green-100 mb-4 px-2 break-words">Save this report for your records</p>
           <button
             onClick={handleDownload}
-            className="bg-white text-green-700 px-8 py-3 rounded-xl font-bold text-lg hover:bg-green-50 transition-all shadow-md"
+            className="bg-white text-green-700 px-6 sm:px-8 py-3 rounded-xl font-bold text-base sm:text-lg hover:bg-green-50 transition-all shadow-md"
           >
             📥 {t.download || 'Download Report'}
           </button>
