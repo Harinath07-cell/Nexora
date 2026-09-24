@@ -2,6 +2,8 @@ import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 export type Language = 'en' | 'hi' | 'ta' | 'te' | 'kn' | 'ml' | 'mr' | 'bn' | 'or';
 
+export type UserType = 'existing' | 'savings' | 'loan';
+
 export interface UserData {
   name: string;
   address: string;
@@ -12,13 +14,14 @@ export interface UserData {
   community: string;
   businessType: string;
   language: Language;
+  userType?: UserType;
 }
 
 interface AppContextType {
   userData: UserData;
   setUserData: (d: Partial<UserData>) => void;
-  currentScreen: 'login' | 'financial-plan' | 'report';
-  setScreen: (s: 'login' | 'financial-plan' | 'report') => void;
+  currentScreen: 'home' | 'login' | 'financial-plan' | 'report' | 'loan-finder';
+  setScreen: (s: 'home' | 'login' | 'financial-plan' | 'report' | 'loan-finder') => void;
 }
 
 const defaultUserData: UserData = {
@@ -37,13 +40,13 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export function AppProvider({ children }: { children: ReactNode }) {
   const [userData, setUserDataState] = useState<UserData>(defaultUserData);
-  const [currentScreen, setCurrentScreen] = useState<'login' | 'financial-plan' | 'report'>('login');
+  const [currentScreen, setCurrentScreen] = useState<'home' | 'login' | 'financial-plan' | 'report' | 'loan-finder'>('home');
 
   const setUserData = (d: Partial<UserData>) => {
     setUserDataState(prev => ({ ...prev, ...d }));
   };
 
-  const setScreen = (s: 'login' | 'financial-plan' | 'report') => {
+  const setScreen = (s: 'home' | 'login' | 'financial-plan' | 'report' | 'loan-finder') => {
     setCurrentScreen(s);
   };
 
