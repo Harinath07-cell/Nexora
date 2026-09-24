@@ -7,7 +7,7 @@ export default function HomePage() {
 
   const handleExistingBusiness = () => {
     setUserData({ userType: 'existing' });
-    setScreen('report');
+    setScreen('existing-business-analysis');
   };
 
   const handleHasSavings = () => {

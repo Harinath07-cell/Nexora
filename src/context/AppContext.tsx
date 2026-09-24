@@ -20,8 +20,8 @@ export interface UserData {
 interface AppContextType {
   userData: UserData;
   setUserData: (d: Partial<UserData>) => void;
-  currentScreen: 'home' | 'login' | 'financial-plan' | 'report' | 'loan-finder';
-  setScreen: (s: 'home' | 'login' | 'financial-plan' | 'report' | 'loan-finder') => void;
+  currentScreen: 'home' | 'login' | 'financial-plan' | 'report' | 'loan-finder' | 'existing-business-analysis' | 'business-analysis-report';
+  setScreen: (s: 'home' | 'login' | 'financial-plan' | 'report' | 'loan-finder' | 'existing-business-analysis' | 'business-analysis-report') => void;
 }
 
 const defaultUserData: UserData = {
@@ -40,13 +40,13 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export function AppProvider({ children }: { children: ReactNode }) {
   const [userData, setUserDataState] = useState<UserData>(defaultUserData);
-  const [currentScreen, setCurrentScreen] = useState<'home' | 'login' | 'financial-plan' | 'report' | 'loan-finder'>('home');
+  const [currentScreen, setCurrentScreen] = useState<'home' | 'login' | 'financial-plan' | 'report' | 'loan-finder' | 'existing-business-analysis' | 'business-analysis-report'>('home');
 
   const setUserData = (d: Partial<UserData>) => {
     setUserDataState(prev => ({ ...prev, ...d }));
   };
 
-  const setScreen = (s: 'home' | 'login' | 'financial-plan' | 'report' | 'loan-finder') => {
+  const setScreen = (s: 'home' | 'login' | 'financial-plan' | 'report' | 'loan-finder' | 'existing-business-analysis' | 'business-analysis-report') => {
     setCurrentScreen(s);
   };
 
