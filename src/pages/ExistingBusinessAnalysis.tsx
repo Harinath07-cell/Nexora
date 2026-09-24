@@ -9,39 +9,23 @@ export default function ExistingBusinessAnalysis() {
   
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
-    // Basic Info
+    // Page 1: Essential Business Info (7 inputs)
     businessName: '',
     businessType: '',
     sector: '',
     yearsInOperation: '',
-    
-    // Financial Data
     annualTurnover: '',
     monthlyRevenue: '',
     monthlyExpenses: '',
-    currentLoans: '',
-    loanAmount: '',
-    loanEMI: '',
     
-    // Operational Data
+    // Page 2: Operations & Market (7 inputs)
     numberOfEmployees: '',
     monthlySalary: '',
-    workingHours: '',
-    daysPerWeek: '',
-    
-    // Market Data
+    currentLoans: '',
+    loanAmount: '',
     averageCustomerPerDay: '',
-    averageTransactionValue: '',
-    mainCustomers: '', // retail/wholesale/both
-    competitionLevel: '', // low/medium/high
-    
-    // Location
-    businessArea: '', // sq ft
-    monthlyRent: '',
-    location: '', // prime/average/poor
-    
-    // Challenges
-    mainChallenges: [] as string[],
+    competitionLevel: '',
+    location: '',
   });
 
   const sectors = [
@@ -58,30 +42,8 @@ export default function ExistingBusinessAnalysis() {
     'Other'
   ];
 
-  const challenges = [
-    'Low customer footfall',
-    'High competition',
-    'Rising costs',
-    'Difficulty in getting loans',
-    'Staff management issues',
-    'Marketing challenges',
-    'Seasonal fluctuations',
-    'Supply chain issues',
-    'Technology adoption',
-    'Cash flow problems'
-  ];
-
   const handleInputChange = (field: string, value: any) => {
     setFormData(prev => ({ ...prev, [field]: value }));
-  };
-
-  const handleChallengeToggle = (challenge: string) => {
-    setFormData(prev => ({
-      ...prev,
-      mainChallenges: prev.mainChallenges.includes(challenge)
-        ? prev.mainChallenges.filter(c => c !== challenge)
-        : [...prev.mainChallenges, challenge]
-    }));
   };
 
   const handleSubmit = () => {
@@ -97,19 +59,13 @@ export default function ExistingBusinessAnalysis() {
 
   const canProceed = () => {
     if (step === 1) {
-      return formData.businessName && formData.businessType && formData.sector && formData.yearsInOperation;
+      return formData.businessName && formData.businessType && formData.sector && 
+             formData.yearsInOperation && formData.annualTurnover && 
+             formData.monthlyRevenue && formData.monthlyExpenses;
     }
     if (step === 2) {
-      return formData.annualTurnover && formData.monthlyRevenue && formData.monthlyExpenses;
-    }
-    if (step === 3) {
-      return formData.numberOfEmployees && formData.workingHours;
-    }
-    if (step === 4) {
-      return formData.averageCustomerPerDay && formData.averageTransactionValue;
-    }
-    if (step === 5) {
-      return formData.businessArea && formData.location;
+      return formData.numberOfEmployees && formData.averageCustomerPerDay && 
+             formData.competitionLevel && formData.location;
     }
     return true;
   };
@@ -123,19 +79,19 @@ export default function ExistingBusinessAnalysis() {
             📊
           </div>
           <h2 className="text-2xl font-bold text-gray-800">Business Analysis</h2>
-          <p className="text-gray-500">Step {step} of 5</p>
+          <p className="text-gray-500">Step {step} of 2</p>
         </div>
 
         {/* Progress Bar */}
         <div className="bg-white rounded-full h-2 mb-6 overflow-hidden">
           <div 
             className="bg-green-600 h-full transition-all duration-300"
-            style={{ width: `${(step / 5) * 100}%` }}
+            style={{ width: `${(step / 2) * 100}%` }}
           />
         </div>
 
         <div className="bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
-          {/* Step 1: Basic Information */}
+          {/* Page 1: Essential Business Information */}
           {step === 1 && (
             <div className="space-y-4">
               <h3 className="text-xl font-bold text-gray-800 mb-4">📋 Basic Business Information</h3>
@@ -189,14 +145,7 @@ export default function ExistingBusinessAnalysis() {
                   className="w-full border-2 border-gray-200 rounded-lg px-4 py-3 text-gray-800 focus:border-green-500 focus:outline-none"
                 />
               </div>
-            </div>
-          )}
 
-          {/* Step 2: Financial Data */}
-          {step === 2 && (
-            <div className="space-y-4">
-              <h3 className="text-xl font-bold text-gray-800 mb-4">💰 Financial Information</h3>
-              
               <div>
                 <label className="block text-sm font-bold text-gray-700 mb-2">Annual Turnover (₹)</label>
                 <input
@@ -231,52 +180,13 @@ export default function ExistingBusinessAnalysis() {
                 />
                 <p className="text-xs text-gray-500 mt-1">Include rent, salaries, utilities, raw materials, etc.</p>
               </div>
-
-              <div className="bg-blue-50 rounded-lg p-4 border border-blue-200">
-                <label className="flex items-start gap-2 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={formData.currentLoans !== ''}
-                    onChange={(e) => handleInputChange('currentLoans', e.target.checked ? 'yes' : '')}
-                    className="mt-1 w-4 h-4 text-green-600"
-                  />
-                  <div className="flex-1">
-                    <span className="font-semibold text-gray-800">Do you have any existing loans?</span>
-                  </div>
-                </label>
-              </div>
-
-              {formData.currentLoans === 'yes' && (
-                <div className="space-y-3 pl-6 border-l-4 border-blue-200">
-                  <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">Total Loan Amount (₹)</label>
-                    <input
-                      type="number"
-                      value={formData.loanAmount}
-                      onChange={(e) => handleInputChange('loanAmount', e.target.value)}
-                      placeholder="e.g., 500000"
-                      className="w-full border-2 border-gray-200 rounded-lg px-4 py-3 text-gray-800 focus:border-green-500 focus:outline-none"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">Monthly EMI (₹)</label>
-                    <input
-                      type="number"
-                      value={formData.loanEMI}
-                      onChange={(e) => handleInputChange('loanEMI', e.target.value)}
-                      placeholder="e.g., 15000"
-                      className="w-full border-2 border-gray-200 rounded-lg px-4 py-3 text-gray-800 focus:border-green-500 focus:outline-none"
-                    />
-                  </div>
-                </div>
-              )}
             </div>
           )}
 
-          {/* Step 3: Operational Data */}
-          {step === 3 && (
+          {/* Page 2: Operations & Market */}
+          {step === 2 && (
             <div className="space-y-4">
-              <h3 className="text-xl font-bold text-gray-800 mb-4">👥 Operational Information</h3>
+              <h3 className="text-xl font-bold text-gray-800 mb-4">👥 Operations & Market</h3>
               
               <div>
                 <label className="block text-sm font-bold text-gray-700 mb-2">Number of Employees</label>
@@ -301,35 +211,33 @@ export default function ExistingBusinessAnalysis() {
                 />
               </div>
 
-              <div>
-                <label className="block text-sm font-bold text-gray-700 mb-2">Working Hours per Day</label>
-                <input
-                  type="number"
-                  value={formData.workingHours}
-                  onChange={(e) => handleInputChange('workingHours', e.target.value)}
-                  placeholder="e.g., 10"
-                  className="w-full border-2 border-gray-200 rounded-lg px-4 py-3 text-gray-800 focus:border-green-500 focus:outline-none"
-                />
+              <div className="bg-blue-50 rounded-lg p-4 border border-blue-200">
+                <label className="flex items-start gap-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={formData.currentLoans === 'yes'}
+                    onChange={(e) => handleInputChange('currentLoans', e.target.checked ? 'yes' : 'no')}
+                    className="mt-1 w-4 h-4 text-green-600"
+                  />
+                  <div className="flex-1">
+                    <span className="font-semibold text-gray-800">Do you have any existing loans?</span>
+                  </div>
+                </label>
               </div>
 
-              <div>
-                <label className="block text-sm font-bold text-gray-700 mb-2">Days Open per Week</label>
-                <input
-                  type="number"
-                  value={formData.daysPerWeek}
-                  onChange={(e) => handleInputChange('daysPerWeek', e.target.value)}
-                  placeholder="e.g., 6"
-                  className="w-full border-2 border-gray-200 rounded-lg px-4 py-3 text-gray-800 focus:border-green-500 focus:outline-none"
-                />
-              </div>
-            </div>
-          )}
+              {formData.currentLoans === 'yes' && (
+                <div className="pl-6 border-l-4 border-blue-200">
+                  <label className="block text-sm font-bold text-gray-700 mb-2">Total Loan Amount (₹)</label>
+                  <input
+                    type="number"
+                    value={formData.loanAmount}
+                    onChange={(e) => handleInputChange('loanAmount', e.target.value)}
+                    placeholder="e.g., 500000"
+                    className="w-full border-2 border-gray-200 rounded-lg px-4 py-3 text-gray-800 focus:border-green-500 focus:outline-none"
+                  />
+                </div>
+              )}
 
-          {/* Step 4: Market Data */}
-          {step === 4 && (
-            <div className="space-y-4">
-              <h3 className="text-xl font-bold text-gray-800 mb-4">🎯 Market Information</h3>
-              
               <div>
                 <label className="block text-sm font-bold text-gray-700 mb-2">Average Customers per Day</label>
                 <input
@@ -339,31 +247,6 @@ export default function ExistingBusinessAnalysis() {
                   placeholder="e.g., 50"
                   className="w-full border-2 border-gray-200 rounded-lg px-4 py-3 text-gray-800 focus:border-green-500 focus:outline-none"
                 />
-              </div>
-
-              <div>
-                <label className="block text-sm font-bold text-gray-700 mb-2">Average Transaction Value (₹)</label>
-                <input
-                  type="number"
-                  value={formData.averageTransactionValue}
-                  onChange={(e) => handleInputChange('averageTransactionValue', e.target.value)}
-                  placeholder="e.g., 500"
-                  className="w-full border-2 border-gray-200 rounded-lg px-4 py-3 text-gray-800 focus:border-green-500 focus:outline-none"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-bold text-gray-700 mb-2">Main Customer Type</label>
-                <select
-                  value={formData.mainCustomers}
-                  onChange={(e) => handleInputChange('mainCustomers', e.target.value)}
-                  className="w-full border-2 border-gray-200 rounded-lg px-4 py-3 text-gray-800 focus:border-green-500 focus:outline-none"
-                >
-                  <option value="">Select customer type</option>
-                  <option value="retail">Retail (Individual customers)</option>
-                  <option value="wholesale">Wholesale (Bulk buyers)</option>
-                  <option value="both">Both Retail & Wholesale</option>
-                </select>
               </div>
 
               <div>
@@ -379,38 +262,9 @@ export default function ExistingBusinessAnalysis() {
                   <option value="high">High (6+ similar businesses)</option>
                 </select>
               </div>
-            </div>
-          )}
-
-          {/* Step 5: Location & Challenges */}
-          {step === 5 && (
-            <div className="space-y-4">
-              <h3 className="text-xl font-bold text-gray-800 mb-4">📍 Location & Challenges</h3>
-              
-              <div>
-                <label className="block text-sm font-bold text-gray-700 mb-2">Business Area (sq ft)</label>
-                <input
-                  type="number"
-                  value={formData.businessArea}
-                  onChange={(e) => handleInputChange('businessArea', e.target.value)}
-                  placeholder="e.g., 500"
-                  className="w-full border-2 border-gray-200 rounded-lg px-4 py-3 text-gray-800 focus:border-green-500 focus:outline-none"
-                />
-              </div>
 
               <div>
-                <label className="block text-sm font-bold text-gray-700 mb-2">Monthly Rent (₹)</label>
-                <input
-                  type="number"
-                  value={formData.monthlyRent}
-                  onChange={(e) => handleInputChange('monthlyRent', e.target.value)}
-                  placeholder="e.g., 15000"
-                  className="w-full border-2 border-gray-200 rounded-lg px-4 py-3 text-gray-800 focus:border-green-500 focus:outline-none"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-bold text-gray-700 mb-2">Location Quality</label>
+                <label className="block text-sm font-bold text-gray-700 mb-2">Business Location Quality</label>
                 <select
                   value={formData.location}
                   onChange={(e) => handleInputChange('location', e.target.value)}
@@ -421,30 +275,6 @@ export default function ExistingBusinessAnalysis() {
                   <option value="average">Average (Good location, moderate footfall)</option>
                   <option value="poor">Poor (Interior, low footfall)</option>
                 </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-bold text-gray-700 mb-3">Main Challenges (Select all that apply)</label>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                  {challenges.map((challenge) => (
-                    <label
-                      key={challenge}
-                      className={`flex items-center gap-2 p-3 rounded-lg cursor-pointer border-2 transition-all ${
-                        formData.mainChallenges.includes(challenge)
-                          ? 'bg-green-50 border-green-400'
-                          : 'border-gray-200 hover:border-gray-300'
-                      }`}
-                    >
-                      <input
-                        type="checkbox"
-                        checked={formData.mainChallenges.includes(challenge)}
-                        onChange={() => handleChallengeToggle(challenge)}
-                        className="w-4 h-4 text-green-600"
-                      />
-                      <span className="text-sm text-gray-700">{challenge}</span>
-                    </label>
-                  ))}
-                </div>
               </div>
             </div>
           )}
@@ -460,7 +290,7 @@ export default function ExistingBusinessAnalysis() {
               </button>
             )}
             
-            {step < 5 ? (
+            {step < 2 ? (
               <button
                 onClick={() => setStep(step + 1)}
                 disabled={!canProceed()}

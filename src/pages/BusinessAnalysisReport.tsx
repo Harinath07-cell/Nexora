@@ -54,15 +54,17 @@ export default function BusinessAnalysisReport() {
     const monthlyExpenses = Number(data.monthlyExpenses) || 0;
     const annualTurnover = Number(data.annualTurnover) || 0;
     const numberOfEmployees = Number(data.numberOfEmployees) || 1;
-    const businessArea = Number(data.businessArea) || 1;
     const monthlySalary = Number(data.monthlySalary) || 0;
     const loanAmount = Number(data.loanAmount) || 0;
-    const loanEMI = Number(data.loanEMI) || 0;
     const averageCustomerPerDay = Number(data.averageCustomerPerDay) || 0;
-    const averageTransactionValue = Number(data.averageTransactionValue) || 0;
-    const monthlyRent = Number(data.monthlyRent) || 0;
-    const workingHours = Number(data.workingHours) || 8;
-    const daysPerWeek = Number(data.daysPerWeek) || 6;
+    
+    // Calculate estimated values for removed fields
+    const averageTransactionValue = averageCustomerPerDay > 0 ? monthlyRevenue / (averageCustomerPerDay * 26) : 0;
+    const loanEMI = loanAmount > 0 ? (loanAmount * 0.012) : 0; // Approx 1.2% monthly
+    const businessArea = 500; // Default assumption
+    const monthlyRent = data.location === 'prime' ? 25000 : data.location === 'average' ? 15000 : 8000;
+    const workingHours = 10; // Default assumption
+    const daysPerWeek = 6; // Default assumption
 
     // Financial Metrics
     const grossProfit = monthlyRevenue - (monthlyExpenses - monthlySalary - monthlyRent);
@@ -251,20 +253,8 @@ export default function BusinessAnalysisReport() {
       });
     }
 
-    // Challenge-based recommendations
-    if (data.mainChallenges.includes('Cash flow problems')) {
-      recommendations.push({
-        category: 'Financial',
-        priority: 'high',
-        title: 'Improve Cash Flow Management',
-        description: 'Implement strict credit policies and maintain 3-month expense reserve.',
-        impact: 'Could eliminate cash flow issues',
-        implementationTime: '1-2 months',
-        estimatedBenefit: 'Stable operations and reduced stress'
-      });
-    }
-
-    if (data.mainChallenges.includes('Low customer footfall')) {
+    // Challenge-based recommendations (inferred from metrics)
+    if (averageCustomerPerDay < 20 && monthlyRevenue < 50000) {
       recommendations.push({
         category: 'Marketing',
         priority: 'high',
@@ -273,6 +263,18 @@ export default function BusinessAnalysisReport() {
         impact: 'Could increase customers by 30-40%',
         implementationTime: '2-3 months',
         estimatedBenefit: '₹' + Math.round(monthlyRevenue * 0.25).toLocaleString('en-IN') + ' additional monthly revenue'
+      });
+    }
+
+    if (netProfitMargin < 5 && monthlyRevenue > 0) {
+      recommendations.push({
+        category: 'Financial',
+        priority: 'high',
+        title: 'Improve Cash Flow Management',
+        description: 'Implement strict credit policies and maintain 3-month expense reserve.',
+        impact: 'Could eliminate cash flow issues',
+        implementationTime: '1-2 months',
+        estimatedBenefit: 'Stable operations and reduced stress'
       });
     }
 
