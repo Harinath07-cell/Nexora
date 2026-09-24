@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import { findNearestCity } from '../data/cityData';
 
 interface MapComponentProps {
   center?: [number, number];
@@ -9,6 +10,7 @@ interface MapComponentProps {
   showBanks?: boolean;
   showMarkets?: boolean;
   userLocation?: { lat: number; lng: number; address: string };
+  competitors?: Array<{ name: string; distance: string; rating: string; lat?: number; lng?: number }>;
 }
 
 export default function MapComponent({
@@ -18,6 +20,7 @@ export default function MapComponent({
   showBanks = true,
   showMarkets = true,
   userLocation,
+  competitors = [],
 }: MapComponentProps) {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
@@ -53,7 +56,7 @@ export default function MapComponent({
       map.setView([userLocation.lat, userLocation.lng], 12);
     }
 
-    // Add sample bank locations (for demo)
+    // Add bank locations (real data if available, otherwise sample)
     if (showBanks) {
       const bankIcon = L.divIcon({
         html: '<div style="background: #3b82f6; width: 16px; height: 16px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.2);"></div>',
@@ -62,22 +65,38 @@ export default function MapComponent({
         iconAnchor: [8, 8],
       });
 
-      // Sample bank locations (will be replaced with real data)
-      const banks = [
-        { lat: 28.6139, lng: 77.2090, name: 'State Bank of India', type: 'Public Bank' },
-        { lat: 19.0760, lng: 72.8777, name: 'Punjab National Bank', type: 'Public Bank' },
-        { lat: 13.0827, lng: 80.2707, name: 'Canara Bank', type: 'Public Bank' },
-        { lat: 22.5726, lng: 88.3639, name: 'India Post Payments Bank', type: 'Payments Bank' },
-      ];
+      // Check if we have real data for this location
+      let banks: Array<{ lat: number; lng: number; name: string; type: string; address?: string; branch?: string }> = [];
+      
+      if (userLocation) {
+        const cityData = findNearestCity(userLocation.lat, userLocation.lng);
+        if (cityData && cityData.banks.length > 0) {
+          banks = cityData.banks;
+        }
+      }
+
+      // Fallback to sample data if no real data found
+      if (banks.length === 0) {
+        banks = [
+          { lat: 28.6139, lng: 77.2090, name: 'State Bank of India', type: 'Public Bank' },
+          { lat: 19.0760, lng: 72.8777, name: 'Punjab National Bank', type: 'Public Bank' },
+          { lat: 13.0827, lng: 80.2707, name: 'Canara Bank', type: 'Public Bank' },
+          { lat: 22.5726, lng: 88.3639, name: 'India Post Payments Bank', type: 'Payments Bank' },
+        ];
+      }
 
       banks.forEach((bank) => {
+        const popupContent = bank.address 
+          ? `<b>${bank.name}</b><br/>${bank.branch || bank.type}<br/><small>${bank.address}</small>`
+          : `<b>${bank.name}</b><br/>${bank.type}`;
+        
         L.marker([bank.lat, bank.lng], { icon: bankIcon })
           .addTo(map)
-          .bindPopup(`<b>${bank.name}</b><br/>${bank.type}`);
+          .bindPopup(popupContent);
       });
     }
 
-    // Add sample market locations (for demo)
+    // Add market locations (real data if available, otherwise sample)
     if (showMarkets) {
       const marketIcon = L.divIcon({
         html: '<div style="background: #f59e0b; width: 16px; height: 16px; border-radius: 4px; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.2);"></div>',
@@ -86,17 +105,56 @@ export default function MapComponent({
         iconAnchor: [8, 8],
       });
 
-      // Sample market locations (will be replaced with real data)
-      const markets = [
-        { lat: 28.6200, lng: 77.2100, name: 'Sadar Bazaar', type: 'Wholesale Market' },
-        { lat: 19.0800, lng: 72.8800, name: 'Crawford Market', type: 'Retail Market' },
-        { lat: 13.0900, lng: 80.2800, name: 'Koyambedu Market', type: 'Vegetable Market' },
-      ];
+      // Check if we have real data for this location
+      let markets: Array<{ lat: number; lng: number; name: string; type: string; address?: string; specialty?: string }> = [];
+      
+      if (userLocation) {
+        const cityData = findNearestCity(userLocation.lat, userLocation.lng);
+        if (cityData && cityData.markets.length > 0) {
+          markets = cityData.markets;
+        }
+      }
+
+      // Fallback to sample data if no real data found
+      if (markets.length === 0) {
+        markets = [
+          { lat: 28.6200, lng: 77.2100, name: 'Sadar Bazaar', type: 'Wholesale Market' },
+          { lat: 19.0800, lng: 72.8800, name: 'Crawford Market', type: 'Retail Market' },
+          { lat: 13.0900, lng: 80.2800, name: 'Koyambedu Market', type: 'Vegetable Market' },
+        ];
+      }
 
       markets.forEach((market) => {
+        const popupContent = market.address 
+          ? `<b>${market.name}</b><br/>${market.type}<br/><small>${market.address}</small>${market.specialty ? `<br/><i>${market.specialty}</i>` : ''}`
+          : `<b>${market.name}</b><br/>${market.type}`;
+        
         L.marker([market.lat, market.lng], { icon: marketIcon })
           .addTo(map)
-          .bindPopup(`<b>${market.name}</b><br/>${market.type}`);
+          .bindPopup(popupContent);
+      });
+    }
+
+    // Add competitor locations if available
+    if (competitors.length > 0 && userLocation) {
+      const competitorIcon = L.divIcon({
+        html: '<div style="background: #ef4444; width: 16px; height: 16px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.2);"></div>',
+        className: 'competitor-marker',
+        iconSize: [16, 16],
+        iconAnchor: [8, 8],
+      });
+
+      // Generate random positions around user location for demo
+      competitors.forEach((competitor, index) => {
+        // Create positions in a circle around user location
+        const angle = (index / competitors.length) * 2 * Math.PI;
+        const distance = 0.01 + (index * 0.005); // Spread them out
+        const lat = userLocation.lat + distance * Math.cos(angle);
+        const lng = userLocation.lng + distance * Math.sin(angle);
+
+        L.marker([lat, lng], { icon: competitorIcon })
+          .addTo(map)
+          .bindPopup(`<b>${competitor.name}</b><br/>Distance: ${competitor.distance}<br/>Rating: ⭐ ${competitor.rating}`);
       });
     }
 
@@ -107,7 +165,7 @@ export default function MapComponent({
         mapInstanceRef.current = null;
       }
     };
-  }, [center, zoom, userLocation, showBanks, showMarkets]);
+  }, [center, zoom, userLocation, showBanks, showMarkets, competitors]);
 
   return (
     <div className="relative">
@@ -129,9 +187,15 @@ export default function MapComponent({
           </div>
         )}
         {showMarkets && (
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 mb-1">
             <div className="w-4 h-4 rounded bg-amber-500 border-2 border-white"></div>
             <span>Markets</span>
+          </div>
+        )}
+        {competitors.length > 0 && (
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 rounded-full bg-red-500 border-2 border-white"></div>
+            <span>Competitors</span>
           </div>
         )}
       </div>

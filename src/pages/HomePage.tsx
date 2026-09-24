@@ -1,6 +1,5 @@
 import { useApp } from '../context/AppContext';
 import { useLanguage } from '../context/LanguageContext';
-import MapComponent from '../components/MapComponent';
 
 export default function HomePage() {
   const { setUserData, setScreen } = useApp();
@@ -31,23 +30,6 @@ export default function HomePage() {
           </div>
           <h1 className="text-3xl font-bold text-gray-800 mb-2">{t.welcome}</h1>
           <p className="text-gray-600 text-lg">{t.welcomeSubtitle}</p>
-        </div>
-
-        {/* Map Section */}
-        <div className="bg-white rounded-2xl shadow-lg p-4 border border-gray-100 mb-6">
-          <h2 className="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">
-            <span>🗺️</span>
-            <span>Nearby Banks & Markets</span>
-          </h2>
-          <MapComponent
-            height="300px"
-            zoom={5}
-            showBanks={true}
-            showMarkets={true}
-          />
-          <p className="text-xs text-gray-500 mt-2 text-center">
-            This map shows sample locations. Your actual location will be shown after login.
-          </p>
         </div>
 
         {/* Three Options */}

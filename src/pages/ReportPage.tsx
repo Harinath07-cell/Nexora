@@ -3,6 +3,8 @@ import { useApp } from '../context/AppContext';
 import { useLanguage } from '../context/LanguageContext';
 import { generateReportData, BUSINESS_TYPES } from '../data/datasets';
 import Speaker from '../components/Speaker';
+import MapComponent from '../components/MapComponent';
+import { getCityData } from '../data/cityData';
 
 export default function ReportPage() {
   const { userData, setScreen } = useApp();
@@ -214,7 +216,7 @@ Ministry of Social Justice & Empowerment
           <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
             <span className="text-2xl">🏪</span> 5. {t.competitorMapping || 'Competitor Mapping'}
           </h3>
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto mb-6">
             <table className="w-full text-sm">
               <thead>
                 <tr className="bg-gray-50">
@@ -234,6 +236,36 @@ Ministry of Social Justice & Empowerment
               </tbody>
             </table>
           </div>
+          
+          {/* Map showing competitor locations */}
+          {userData.village && userData.district && userData.state && (() => {
+            // Try to get coordinates from city data
+            const cityData = getCityData(userData.district) || getCityData(userData.village);
+            const defaultCoords = cityData ? cityData.coordinates : { lat: 11.0168, lng: 76.9558 };
+            
+            return (
+              <div className="mt-6">
+                <h4 className="text-lg font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                  <span>🗺️</span> Competitor Locations on Map
+                </h4>
+                <MapComponent
+                  height="400px"
+                  zoom={13}
+                  showBanks={false}
+                  showMarkets={false}
+                  userLocation={{
+                    lat: defaultCoords.lat,
+                    lng: defaultCoords.lng,
+                    address: `${userData.village}, ${userData.district}, ${userData.state}`
+                  }}
+                  competitors={report.competitors}
+                />
+                <p className="text-xs text-gray-500 mt-2 text-center">
+                  Map shows your location and nearby competitors
+                </p>
+              </div>
+            );
+          })()}
         </div>
 
         <div className="bg-white rounded-2xl shadow-md p-6 mb-6 border border-gray-100">
