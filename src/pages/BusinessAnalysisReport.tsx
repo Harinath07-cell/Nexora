@@ -327,14 +327,14 @@ export default function BusinessAnalysisReport() {
         {/* Overall Health Score */}
         <div className={`rounded-2xl shadow-md p-4 sm:p-6 mb-6 border-2 ${getHealthBg(analysis.metrics.overallHealthScore)}`}>
           <div className="text-center">
-            <h2 className="text-base sm:text-lg font-bold text-gray-800 mb-2">Overall Business Health</h2>
+            <h2 className="text-base sm:text-lg font-bold text-gray-800 mb-2">{t.overallHealth}</h2>
             <div className={`text-5xl sm:text-6xl font-bold ${getHealthColor(analysis.metrics.overallHealthScore)} mb-2 break-words`}>
               {analysis.metrics.overallHealthScore.toFixed(0)}%
             </div>
             <p className="text-sm sm:text-base text-gray-600 px-2">
-              {analysis.metrics.overallHealthScore >= 70 ? '✅ Excellent! Your business is thriving' :
-               analysis.metrics.overallHealthScore >= 50 ? '⚠️ Good, but there\'s room for improvement' :
-               '❌ Needs immediate attention'}
+              {analysis.metrics.overallHealthScore >= 70 ? `✅ ${t.excellent}` :
+               analysis.metrics.overallHealthScore >= 50 ? `⚠️ ${t.good}` :
+               `❌ ${t.needsAttention}`}
             </p>
           </div>
         </div>
@@ -347,7 +347,7 @@ export default function BusinessAnalysisReport() {
               <div className={`text-2xl sm:text-3xl font-bold ${getHealthColor(analysis.metrics.financialHealth)} break-words`}>
                 {analysis.metrics.financialHealth.toFixed(0)}%
               </div>
-              <div className="text-xs sm:text-sm text-gray-600 font-medium mt-1">Financial Health</div>
+              <div className="text-xs sm:text-sm text-gray-600 font-medium mt-1">{t.financialHealth}</div>
             </div>
           </div>
           <div className={`rounded-xl shadow-md p-4 sm:p-5 border-2 ${getHealthBg(analysis.metrics.operationalHealth)}`}>
@@ -356,7 +356,7 @@ export default function BusinessAnalysisReport() {
               <div className={`text-2xl sm:text-3xl font-bold ${getHealthColor(analysis.metrics.operationalHealth)} break-words`}>
                 {analysis.metrics.operationalHealth.toFixed(0)}%
               </div>
-              <div className="text-xs sm:text-sm text-gray-600 font-medium mt-1">Operational Health</div>
+              <div className="text-xs sm:text-sm text-gray-600 font-medium mt-1">{t.operationalHealth}</div>
             </div>
           </div>
           <div className={`rounded-xl shadow-md p-4 sm:p-5 border-2 ${getHealthBg(analysis.metrics.marketHealth)}`}>
@@ -365,7 +365,7 @@ export default function BusinessAnalysisReport() {
               <div className={`text-2xl sm:text-3xl font-bold ${getHealthColor(analysis.metrics.marketHealth)} break-words`}>
                 {analysis.metrics.marketHealth.toFixed(0)}%
               </div>
-              <div className="text-xs sm:text-sm text-gray-600 font-medium mt-1">Market Position</div>
+              <div className="text-xs sm:text-sm text-gray-600 font-medium mt-1">{t.marketPosition}</div>
             </div>
           </div>
         </div>
@@ -373,23 +373,23 @@ export default function BusinessAnalysisReport() {
         {/* Key Financial Metrics */}
         <div className="bg-white rounded-2xl shadow-md p-4 sm:p-6 mb-6 border border-gray-100">
           <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-            <span className="text-xl sm:text-2xl">📊</span> Key Financial Metrics
+            <span className="text-xl sm:text-2xl">📊</span> {t.keyFinancialMetrics}
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             <div className="bg-blue-50 rounded-lg p-3 sm:p-4 border border-blue-200 min-w-0">
-              <p className="text-xs text-gray-600 mb-1">Net Profit Margin</p>
+              <p className="text-xs text-gray-600 mb-1">{t.netProfitMargin}</p>
               <p className="text-xl sm:text-2xl font-bold text-blue-700 break-words">{analysis.metrics.netProfitMargin.toFixed(1)}%</p>
             </div>
             <div className="bg-green-50 rounded-lg p-3 sm:p-4 border border-green-200 min-w-0">
-              <p className="text-xs text-gray-600 mb-1">Gross Margin</p>
+              <p className="text-xs text-gray-600 mb-1">{t.grossMargin}</p>
               <p className="text-xl sm:text-2xl font-bold text-green-700 break-words">{analysis.metrics.grossProfitMargin.toFixed(1)}%</p>
             </div>
             <div className="bg-purple-50 rounded-lg p-3 sm:p-4 border border-purple-200 min-w-0">
-              <p className="text-xs text-gray-600 mb-1">Debt-to-Equity</p>
+              <p className="text-xs text-gray-600 mb-1">{t.debtToEquity}</p>
               <p className="text-xl sm:text-2xl font-bold text-purple-700 break-words">{analysis.metrics.debtToEquityRatio.toFixed(2)}</p>
             </div>
             <div className="bg-orange-50 rounded-lg p-3 sm:p-4 border border-orange-200 min-w-0">
-              <p className="text-xs text-gray-600 mb-1">ROI</p>
+              <p className="text-xs text-gray-600 mb-1">{t.roi}</p>
               <p className="text-xl sm:text-2xl font-bold text-orange-700 break-words">{analysis.metrics.returnOnInvestment.toFixed(1)}%</p>
             </div>
           </div>
@@ -398,23 +398,23 @@ export default function BusinessAnalysisReport() {
         {/* Operational Metrics */}
         <div className="bg-white rounded-2xl shadow-md p-4 sm:p-6 mb-6 border border-gray-100">
           <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-            <span className="text-xl sm:text-2xl">⚙️</span> Operational Efficiency
+            <span className="text-xl sm:text-2xl">⚙️</span> {t.operationalEfficiency}
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             <div className="bg-blue-50 rounded-lg p-3 sm:p-4 border border-blue-200 min-w-0">
-              <p className="text-xs text-gray-600 mb-1">Revenue per Employee</p>
+              <p className="text-xs text-gray-600 mb-1">{t.revenuePerEmployee}</p>
               <p className="text-lg sm:text-xl font-bold text-blue-700 break-words">₹{Math.round(analysis.metrics.revenuePerEmployee).toLocaleString('en-IN')}</p>
             </div>
             <div className="bg-green-50 rounded-lg p-3 sm:p-4 border border-green-200 min-w-0">
-              <p className="text-xs text-gray-600 mb-1">Revenue per Sq Ft</p>
+              <p className="text-xs text-gray-600 mb-1">{t.revenuePerSqFt}</p>
               <p className="text-lg sm:text-xl font-bold text-green-700 break-words">₹{Math.round(analysis.metrics.revenuePerSqFt).toLocaleString('en-IN')}</p>
             </div>
             <div className="bg-purple-50 rounded-lg p-3 sm:p-4 border border-purple-200 min-w-0">
-              <p className="text-xs text-gray-600 mb-1">Daily Revenue</p>
+              <p className="text-xs text-gray-600 mb-1">{t.dailyRevenue}</p>
               <p className="text-lg sm:text-xl font-bold text-purple-700 break-words">₹{Math.round(analysis.metrics.dailyRevenue).toLocaleString('en-IN')}</p>
             </div>
             <div className="bg-orange-50 rounded-lg p-3 sm:p-4 border border-orange-200 min-w-0">
-              <p className="text-xs text-gray-600 mb-1">Capacity Utilization</p>
+              <p className="text-xs text-gray-600 mb-1">{t.capacityUtilization}</p>
               <p className="text-lg sm:text-xl font-bold text-orange-700 break-words">{analysis.metrics.capacityUtilization.toFixed(1)}%</p>
             </div>
           </div>
@@ -423,7 +423,7 @@ export default function BusinessAnalysisReport() {
         {/* Recommendations */}
         <div className="bg-white rounded-2xl shadow-md p-4 sm:p-6 mb-6 border border-gray-100">
           <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-            <span className="text-xl sm:text-2xl">💡</span> Recommendations for Improvement
+            <span className="text-xl sm:text-2xl">💡</span> {t.recommendations}
           </h3>
           <div className="space-y-4">
             {analysis.recommendations.map((rec, index) => (
@@ -435,7 +435,7 @@ export default function BusinessAnalysisReport() {
                     </span>
                     <div className="min-w-0 flex-1">
                       <h4 className="font-bold text-gray-800 text-base sm:text-lg break-words">{rec.title}</h4>
-                      <p className="text-xs text-gray-600 mt-1">Category: {rec.category}</p>
+                      <p className="text-xs text-gray-600 mt-1">{t.category}: {rec.category}</p>
                     </div>
                   </div>
                   <span className={`text-xs px-3 py-1 rounded-full font-semibold whitespace-nowrap self-start ${
@@ -443,21 +443,21 @@ export default function BusinessAnalysisReport() {
                     rec.priority === 'medium' ? 'bg-yellow-200 text-yellow-800' :
                     'bg-blue-200 text-blue-800'
                   }`}>
-                    {rec.priority.toUpperCase()} PRIORITY
+                    {rec.priority === 'high' ? t.highPriority : rec.priority === 'medium' ? t.mediumPriority : t.lowPriority}
                   </span>
                 </div>
                 <p className="text-sm sm:text-base text-gray-700 mb-3 break-words">{rec.description}</p>
                 <div className="grid grid-cols-1 gap-3 text-sm">
                   <div className="bg-white/50 rounded-lg p-3">
-                    <p className="text-xs text-gray-600 mb-1">💰 Impact</p>
+                    <p className="text-xs text-gray-600 mb-1">💰 {t.impact}</p>
                     <p className="font-semibold text-gray-800 break-words">{rec.impact}</p>
                   </div>
                   <div className="bg-white/50 rounded-lg p-3">
-                    <p className="text-xs text-gray-600 mb-1">⏱️ Time Required</p>
+                    <p className="text-xs text-gray-600 mb-1">⏱️ {t.timeRequired}</p>
                     <p className="font-semibold text-gray-800 break-words">{rec.implementationTime}</p>
                   </div>
                   <div className="bg-white/50 rounded-lg p-3">
-                    <p className="text-xs text-gray-600 mb-1">📈 Expected Benefit</p>
+                    <p className="text-xs text-gray-600 mb-1">📈 {t.expectedBenefit}</p>
                     <p className="font-semibold text-gray-800 break-words">{rec.estimatedBenefit}</p>
                   </div>
                 </div>
@@ -470,7 +470,7 @@ export default function BusinessAnalysisReport() {
         {analysis.data.village && analysis.data.district && analysis.data.state && (
           <div className="bg-white rounded-2xl shadow-md p-6 mb-6 border border-gray-100">
             <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-              <span className="text-2xl">🗺️</span> Business Location & Nearby Banks
+              <span className="text-2xl">🗺️</span> {t.businessLocation}
             </h3>
             <MapComponent
               height="400px"
@@ -484,23 +484,23 @@ export default function BusinessAnalysisReport() {
               }}
             />
             <p className="text-xs text-gray-500 mt-2 text-center">
-              Your business location and nearby banks/markets
+              {t.nearbyBanks}
             </p>
           </div>
         )}
 
         {/* Summary */}
         <div className="bg-gradient-to-r from-green-600 to-green-700 rounded-2xl shadow-lg p-4 sm:p-6 text-center text-white">
-          <h3 className="text-lg sm:text-xl font-bold mb-2">Analysis Complete!</h3>
+          <h3 className="text-lg sm:text-xl font-bold mb-2">{t.analysisComplete}</h3>
           <p className="text-sm sm:text-base text-green-100 mb-4 px-2 break-words">
-            Your business health score is {analysis.metrics.overallHealthScore.toFixed(0)}%. 
-            {analysis.recommendations.filter(r => r.priority === 'high').length} high-priority improvements identified.
+            {t.healthScore} {analysis.metrics.overallHealthScore.toFixed(0)}%. 
+            {analysis.recommendations.filter(r => r.priority === 'high').length} {t.improvementsIdentified}
           </p>
           <button
             onClick={() => setScreen('home')}
             className="bg-white text-green-700 px-6 sm:px-8 py-3 rounded-xl font-bold text-base sm:text-lg hover:bg-green-50 transition-all shadow-md"
           >
-            ← Back to Home
+            ← {t.backToHome}
           </button>
         </div>
       </div>

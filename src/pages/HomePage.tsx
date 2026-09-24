@@ -45,10 +45,10 @@ export default function HomePage() {
               </div>
               <div className="flex-1">
                 <h3 className="text-xl font-bold text-gray-800 mb-2">
-                  I have an existing business
+                  {t.existingBusiness}
                 </h3>
                 <p className="text-gray-600 text-sm">
-                  Get a detailed report and analysis for your current business
+                  {t.existingBusinessDesc}
                 </p>
               </div>
               <div className="text-green-600 text-2xl group-hover:translate-x-1 transition-transform">
@@ -68,10 +68,10 @@ export default function HomePage() {
               </div>
               <div className="flex-1">
                 <h3 className="text-xl font-bold text-gray-800 mb-2">
-                  I have savings, want to start new
+                  {t.hasSavings}
                 </h3>
                 <p className="text-gray-600 text-sm">
-                  Plan your new business with your available funds
+                  {t.hasSavingsDesc}
                 </p>
               </div>
               <div className="text-blue-600 text-2xl group-hover:translate-x-1 transition-transform">
@@ -91,10 +91,10 @@ export default function HomePage() {
               </div>
               <div className="flex-1">
                 <h3 className="text-xl font-bold text-gray-800 mb-2">
-                  I need a loan to start
+                  {t.needsLoan}
                 </h3>
                 <p className="text-gray-600 text-sm">
-                  Find the right loan scheme for your business idea
+                  {t.needsLoanDesc}
                 </p>
               </div>
               <div className="text-purple-600 text-2xl group-hover:translate-x-1 transition-transform">
@@ -107,10 +107,10 @@ export default function HomePage() {
         {/* Footer Info */}
         <div className="mt-8 text-center">
           <p className="text-sm text-gray-500">
-            🏛️ Ministry of Social Justice & Empowerment
+            🏛️ {t.ministry}
           </p>
           <p className="text-xs text-gray-400 mt-1">
-            Free service for rural entrepreneurs
+            {t.freeService}
           </p>
         </div>
       </div>

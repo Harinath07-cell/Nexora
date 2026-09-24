@@ -62,7 +62,7 @@ export default function FinancialPlanPage() {
           </h3>
           <div className="bg-blue-50 rounded-lg p-4 border border-blue-200 mb-4">
             <p className="font-bold text-gray-800 text-lg">{bank.name}</p>
-            <p className="text-sm text-gray-600 mt-1">Processing: {bank.processing} | Docs: {bank.docs}</p>
+            <p className="text-sm text-gray-600 mt-1">{t.processing}: {bank.processing} | {t.docs}: {bank.docs}</p>
           </div>
           <div>
             <p className="font-semibold text-gray-700 mb-2">{t.eligibility}:</p>
@@ -91,11 +91,11 @@ export default function FinancialPlanPage() {
             </div>
             <div className="bg-green-50 rounded-lg p-3 border border-green-200 min-w-0">
               <p className="text-xs text-gray-600">{t.tenure}</p>
-              <p className="font-bold text-gray-800 break-words">{financials.tenureYears} years</p>
+              <p className="font-bold text-gray-800 break-words">{financials.tenureYears} {t.years}</p>
             </div>
             <div className="bg-yellow-50 rounded-lg p-3 border border-yellow-200 min-w-0">
               <p className="text-xs text-gray-600">{t.moratorium}</p>
-              <p className="font-bold text-gray-800 break-words">{financials.moratoriumMonths} months</p>
+              <p className="font-bold text-gray-800 break-words">{financials.moratoriumMonths} {t.months}</p>
             </div>
           </div>
         </div>
