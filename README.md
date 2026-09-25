@@ -186,3 +186,4 @@ Ministry: Ministry of Social Justice and Empowerment
 **Built with ❤️ for Rural India**
 
 *GramSahay - Your Village Business Guide*
+"# Nexora" 
