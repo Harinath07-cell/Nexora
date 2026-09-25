@@ -20,6 +20,14 @@ export default function HomePage() {
     setScreen('loan-finder');
   };
 
+  const handleExistingCashFlow = () => {
+    setScreen('existing-cashflow');
+  };
+
+  const handleNewCashFlow = () => {
+    setScreen('new-cashflow');
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50 p-4 pt-16">
       <div className="max-w-2xl mx-auto">
@@ -102,6 +110,61 @@ export default function HomePage() {
               </div>
             </div>
           </button>
+        </div>
+
+        {/* Cash Flow Section */}
+        <div className="mt-8">
+          <h2 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <span className="text-2xl">💹</span>
+            Cash Flow Tracking
+          </h2>
+          <div className="space-y-3">
+            {/* Existing Business Cash Flow */}
+            <button
+              onClick={handleExistingCashFlow}
+              className="w-full bg-white hover:bg-orange-50 border-2 border-orange-200 hover:border-orange-400 rounded-xl p-4 shadow-sm hover:shadow-md transition-all text-left group"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 bg-orange-100 group-hover:bg-orange-200 rounded-lg flex items-center justify-center text-2xl flex-shrink-0 transition-colors">
+                  📊
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-base font-bold text-gray-800">
+                    Existing Business Cash Flow
+                  </h3>
+                  <p className="text-gray-600 text-xs mt-1">
+                    Track income and expenses for your current business
+                  </p>
+                </div>
+                <div className="text-orange-600 text-xl group-hover:translate-x-1 transition-transform">
+                  →
+                </div>
+              </div>
+            </button>
+
+            {/* New Business Cash Flow */}
+            <button
+              onClick={handleNewCashFlow}
+              className="w-full bg-white hover:bg-cyan-50 border-2 border-cyan-200 hover:border-cyan-400 rounded-xl p-4 shadow-sm hover:shadow-md transition-all text-left group"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 bg-cyan-100 group-hover:bg-cyan-200 rounded-lg flex items-center justify-center text-2xl flex-shrink-0 transition-colors">
+                  📈
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-base font-bold text-gray-800">
+                    New Business Cash Flow
+                  </h3>
+                  <p className="text-gray-600 text-xs mt-1">
+                    Plan cash flow for your new business venture
+                  </p>
+                </div>
+                <div className="text-cyan-600 text-xl group-hover:translate-x-1 transition-transform">
+                  →
+                </div>
+              </div>
+            </button>
+          </div>
         </div>
 
         {/* Footer Info */}
