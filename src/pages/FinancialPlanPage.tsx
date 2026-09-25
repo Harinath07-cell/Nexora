@@ -14,7 +14,7 @@ export default function FinancialPlanPage() {
   return (
     <div className="min-h-screen bg-gray-50 pb-8">
       <header className="bg-white shadow-sm border-b sticky top-0 z-40">
-        <div className="max-w-5xl mx-auto px-3 sm:px-4 py-3 flex items-center justify-between gap-2">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-2">
           <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
             <div className="w-9 h-9 sm:w-10 sm:h-10 bg-gradient-to-br from-green-500 to-green-700 rounded-lg flex items-center justify-center text-white text-base sm:text-lg font-bold flex-shrink-0">ग्रा</div>
             <div className="min-w-0 flex-1">
@@ -28,35 +28,35 @@ export default function FinancialPlanPage() {
         </div>
       </header>
 
-      <div className="max-w-5xl mx-auto px-4 py-6">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
         <div className="mb-6">
           <Speaker text={`${t.totalCost} is ${financials.totalCost.toLocaleString('en-IN')} rupees. ${t.loanAmount} is ${financials.loanAmount.toLocaleString('en-IN')} rupees.`} />
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
           <div className="bg-white rounded-xl shadow-md p-4 sm:p-5 border border-gray-100 min-w-0">
             <div className="text-2xl sm:text-3xl mb-2">💰</div>
-            <div className="text-xl sm:text-2xl font-bold text-gray-800 break-words">₹{financials.totalCost.toLocaleString('en-IN')}</div>
+            <div className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-800 break-words">₹{financials.totalCost.toLocaleString('en-IN')}</div>
             <div className="text-xs sm:text-sm text-gray-600 font-medium">{t.totalCost}</div>
           </div>
           <div className="bg-white rounded-xl shadow-md p-4 sm:p-5 border border-gray-100 min-w-0">
             <div className="text-2xl sm:text-3xl mb-2">🏦</div>
-            <div className="text-xl sm:text-2xl font-bold text-gray-800 break-words">₹{financials.loanAmount.toLocaleString('en-IN')}</div>
+            <div className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-800 break-words">₹{financials.loanAmount.toLocaleString('en-IN')}</div>
             <div className="text-xs sm:text-sm text-gray-600 font-medium">{t.loanAmount}</div>
           </div>
           <div className="bg-white rounded-xl shadow-md p-4 sm:p-5 border border-gray-100 min-w-0">
             <div className="text-2xl sm:text-3xl mb-2">👤</div>
-            <div className="text-xl sm:text-2xl font-bold text-gray-800 break-words">₹{financials.margin.toLocaleString('en-IN')}</div>
+            <div className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-800 break-words">₹{financials.margin.toLocaleString('en-IN')}</div>
             <div className="text-xs sm:text-sm text-gray-600 font-medium">{t.yourMargin}</div>
           </div>
           <div className="bg-white rounded-xl shadow-md p-4 sm:p-5 border border-gray-100 min-w-0">
             <div className="text-2xl sm:text-3xl mb-2">📅</div>
-            <div className="text-xl sm:text-2xl font-bold text-gray-800 break-words">₹{financials.quarterlyEMI.toLocaleString('en-IN', { maximumFractionDigits: 0 })}</div>
+            <div className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-800 break-words">₹{financials.quarterlyEMI.toLocaleString('en-IN', { maximumFractionDigits: 0 })}</div>
             <div className="text-xs sm:text-sm text-gray-600 font-medium">{t.quarterlyEMI}</div>
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-md p-6 mb-6 border border-gray-100">
+        <div className="bg-white rounded-2xl shadow-md p-5 sm:p-6 mb-6 border border-gray-100">
           <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
             <span className="text-2xl">🏦</span> {t.partnerBank}
           </h3>

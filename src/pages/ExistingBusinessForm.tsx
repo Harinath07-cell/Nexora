@@ -71,22 +71,22 @@ export default function ExistingBusinessForm() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50 p-4 pt-16 pb-20">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50 p-4 sm:p-6 pt-20 sm:pt-16 pb-20">
       <div className="max-w-3xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-6">
-          <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-700 rounded-xl flex items-center justify-center text-white text-3xl font-bold mx-auto mb-3 shadow-lg">
+        <div className="text-center mb-6 sm:mb-8">
+          <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-green-500 to-green-700 rounded-xl flex items-center justify-center text-white text-3xl sm:text-4xl font-bold mx-auto mb-3 shadow-lg">
             📊
           </div>
-          <h2 className="text-2xl font-bold text-gray-800">{t.businessAnalysis}</h2>
-          <p className="text-gray-500">{t.fillDetails}</p>
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-800 px-2">{t.businessAnalysis}</h2>
+          <p className="text-gray-500 text-sm sm:text-base px-2">{t.fillDetails}</p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-6 border border-gray-100">
+        <div className="bg-white rounded-2xl shadow-lg p-5 sm:p-6 border border-gray-100">
           {/* Section 1: Basic Information */}
-          <div className="mb-6">
-            <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
-              <span className="text-xl">📋</span> {t.basicInfo}
+          <div className="mb-6 sm:mb-8">
+            <h3 className="text-base sm:text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+              <span className="text-lg sm:text-xl">📋</span> {t.basicInfo}
             </h3>
             
             <div className="space-y-4">
@@ -145,9 +145,9 @@ export default function ExistingBusinessForm() {
           </div>
 
           {/* Section 2: Financial Information */}
-          <div className="mb-6">
-            <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
-              <span className="text-xl">💰</span> {t.financialInfo}
+          <div className="mb-6 sm:mb-8">
+            <h3 className="text-base sm:text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+              <span className="text-lg sm:text-xl">💰</span> {t.financialInfo}
             </h3>
             
             <div className="space-y-4">
@@ -189,9 +189,9 @@ export default function ExistingBusinessForm() {
           </div>
 
           {/* Section 3: Operations */}
-          <div className="mb-6">
-            <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
-              <span className="text-xl">👥</span> {t.operations}
+          <div className="mb-6 sm:mb-8">
+            <h3 className="text-base sm:text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+              <span className="text-lg sm:text-xl">👥</span> {t.operations}
             </h3>
             
             <div className="space-y-4">
@@ -249,9 +249,9 @@ export default function ExistingBusinessForm() {
           </div>
 
           {/* Section 4: Market */}
-          <div className="mb-6">
-            <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
-              <span className="text-xl">🎯</span> {t.marketInfo}
+          <div className="mb-6 sm:mb-8">
+            <h3 className="text-base sm:text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+              <span className="text-lg sm:text-xl">🎯</span> {t.marketInfo}
             </h3>
             
             <div className="space-y-4">
@@ -301,7 +301,7 @@ export default function ExistingBusinessForm() {
           {/* Submit Button */}
           <button
             onClick={handleSubmit}
-            className="w-full bg-green-600 hover:bg-green-700 text-white py-4 rounded-xl font-bold text-lg transition-all shadow-md hover:shadow-lg"
+            className="w-full bg-green-600 hover:bg-green-700 text-white py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg transition-all shadow-md hover:shadow-lg"
           >
             📊 {t.generateAnalysis}
           </button>

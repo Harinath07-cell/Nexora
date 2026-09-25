@@ -309,7 +309,7 @@ export default function BusinessAnalysisReport() {
   return (
     <div className="min-h-screen bg-gray-50 pb-8">
       <header className="bg-white shadow-sm border-b sticky top-0 z-40">
-        <div className="max-w-5xl mx-auto px-3 sm:px-4 py-3 flex items-center justify-between gap-2">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-2">
           <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
             <div className="w-9 h-9 sm:w-10 sm:h-10 bg-gradient-to-br from-green-500 to-green-700 rounded-lg flex items-center justify-center text-white text-base sm:text-lg font-bold flex-shrink-0">📊</div>
             <div className="min-w-0 flex-1">
@@ -323,12 +323,12 @@ export default function BusinessAnalysisReport() {
         </div>
       </header>
 
-      <div className="max-w-5xl mx-auto px-4 py-6">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
         {/* Overall Health Score */}
-        <div className={`rounded-2xl shadow-md p-4 sm:p-6 mb-6 border-2 ${getHealthBg(analysis.metrics.overallHealthScore)}`}>
+        <div className={`rounded-2xl shadow-md p-5 sm:p-6 mb-6 border-2 ${getHealthBg(analysis.metrics.overallHealthScore)}`}>
           <div className="text-center">
             <h2 className="text-base sm:text-lg font-bold text-gray-800 mb-2">{t.overallHealth}</h2>
-            <div className={`text-5xl sm:text-6xl font-bold ${getHealthColor(analysis.metrics.overallHealthScore)} mb-2 break-words`}>
+            <div className={`text-4xl sm:text-5xl lg:text-6xl font-bold ${getHealthColor(analysis.metrics.overallHealthScore)} mb-2 break-words`}>
               {analysis.metrics.overallHealthScore.toFixed(0)}%
             </div>
             <p className="text-sm sm:text-base text-gray-600 px-2">
@@ -371,26 +371,26 @@ export default function BusinessAnalysisReport() {
         </div>
 
         {/* Key Financial Metrics */}
-        <div className="bg-white rounded-2xl shadow-md p-4 sm:p-6 mb-6 border border-gray-100">
+        <div className="bg-white rounded-2xl shadow-md p-5 sm:p-6 mb-6 border border-gray-100">
           <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
             <span className="text-xl sm:text-2xl">📊</span> {t.keyFinancialMetrics}
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             <div className="bg-blue-50 rounded-lg p-3 sm:p-4 border border-blue-200 min-w-0">
               <p className="text-xs text-gray-600 mb-1">{t.netProfitMargin}</p>
-              <p className="text-xl sm:text-2xl font-bold text-blue-700 break-words">{analysis.metrics.netProfitMargin.toFixed(1)}%</p>
+              <p className="text-lg sm:text-xl lg:text-2xl font-bold text-blue-700 break-words">{analysis.metrics.netProfitMargin.toFixed(1)}%</p>
             </div>
             <div className="bg-green-50 rounded-lg p-3 sm:p-4 border border-green-200 min-w-0">
               <p className="text-xs text-gray-600 mb-1">{t.grossMargin}</p>
-              <p className="text-xl sm:text-2xl font-bold text-green-700 break-words">{analysis.metrics.grossProfitMargin.toFixed(1)}%</p>
+              <p className="text-lg sm:text-xl lg:text-2xl font-bold text-green-700 break-words">{analysis.metrics.grossProfitMargin.toFixed(1)}%</p>
             </div>
             <div className="bg-purple-50 rounded-lg p-3 sm:p-4 border border-purple-200 min-w-0">
               <p className="text-xs text-gray-600 mb-1">{t.debtToEquity}</p>
-              <p className="text-xl sm:text-2xl font-bold text-purple-700 break-words">{analysis.metrics.debtToEquityRatio.toFixed(2)}</p>
+              <p className="text-lg sm:text-xl lg:text-2xl font-bold text-purple-700 break-words">{analysis.metrics.debtToEquityRatio.toFixed(2)}</p>
             </div>
             <div className="bg-orange-50 rounded-lg p-3 sm:p-4 border border-orange-200 min-w-0">
               <p className="text-xs text-gray-600 mb-1">{t.roi}</p>
-              <p className="text-xl sm:text-2xl font-bold text-orange-700 break-words">{analysis.metrics.returnOnInvestment.toFixed(1)}%</p>
+              <p className="text-lg sm:text-xl lg:text-2xl font-bold text-orange-700 break-words">{analysis.metrics.returnOnInvestment.toFixed(1)}%</p>
             </div>
           </div>
         </div>

@@ -42,17 +42,17 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50 p-4 pt-16">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50 p-4 sm:p-6 pt-20 sm:pt-16">
       <div className="max-w-2xl mx-auto">
-        <div className="text-center mb-6">
-          <div className="w-14 h-14 bg-gradient-to-br from-green-500 to-green-700 rounded-xl flex items-center justify-center text-white text-2xl font-bold mx-auto mb-3 shadow-lg">
+        <div className="text-center mb-6 sm:mb-8">
+          <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-green-500 to-green-700 rounded-xl flex items-center justify-center text-white text-2xl sm:text-3xl font-bold mx-auto mb-3 shadow-lg">
             ग्रा
           </div>
-          <h2 className="text-2xl font-bold text-gray-800">{t.welcome}</h2>
-          <p className="text-gray-500">{t.welcomeSubtitle}</p>
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-800 px-2">{t.welcome}</h2>
+          <p className="text-gray-500 text-sm sm:text-base px-2">{t.welcomeSubtitle}</p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
+        <div className="bg-white rounded-2xl shadow-lg p-5 sm:p-6 border border-gray-100">
           {/* Name */}
           <div className="mb-5">
             <label className="block text-sm font-bold text-gray-700 mb-2">{t.yourName}</label>
@@ -66,8 +66,8 @@ export default function LoginPage() {
           </div>
 
           {/* Address Section */}
-          <div className="mb-5 p-4 bg-blue-50 rounded-lg border border-blue-200">
-            <h3 className="text-lg font-bold text-blue-900 mb-3">📍 {t.yourAddress}</h3>
+          <div className="mb-5 p-4 sm:p-5 bg-blue-50 rounded-lg border border-blue-200">
+            <h3 className="text-base sm:text-lg font-bold text-blue-900 mb-3">📍 {t.yourAddress}</h3>
             
             {/* Full Address */}
             <div className="mb-4">
@@ -82,7 +82,7 @@ export default function LoginPage() {
             </div>
 
             {/* State, District, Village Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
               {/* State */}
               <div>
                 <label className="block text-sm font-bold text-gray-700 mb-2">{t.state}</label>
